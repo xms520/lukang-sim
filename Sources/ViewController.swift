@@ -12,8 +12,6 @@ class ViewController: UIViewController {
         let config = WKWebViewConfiguration()
         config.preferences = WKPreferences()
         config.preferences.minimumFontSize = 10
-
-        // Allow local file access
         config.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
         config.preferences.javaScriptEnabled = true
 
@@ -22,10 +20,11 @@ class ViewController: UIViewController {
         webView.navigationDelegate = self
         view.addSubview(webView)
 
-        // Load local HTML
-        if let htmlPath = Bundle.main.path(forResource: "index", ofType: "html", inDirectory: "Resources") {
+        // Load local HTML from app bundle (Resources copied in post-build step)
+        if let htmlPath = Bundle.main.path(forResource: "index", ofType: "html") {
             let htmlURL = URL(fileURLWithPath: htmlPath)
-            webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlURL.deletingLastPathComponent())
+            let basePath = htmlURL.deletingLastPathComponent().path
+            webView.loadFileURL(htmlURL, allowingReadAccessTo: URL(fileURLWithPath: basePath))
         }
     }
 
@@ -39,7 +38,6 @@ extension ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         print("[LuckinSim] Page loaded")
     }
-
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("[LuckinSim] Load failed: \(error.localizedDescription)")
     }
