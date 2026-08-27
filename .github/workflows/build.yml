@@ -22,7 +22,7 @@ jobs:
       - name: Build for iPhoneOS
         run: |
           xcodebuild build \
-            -workspace LuckinSim.xcworkspace \
+            -project LuckinSim.xcodeproj \
             -scheme LuckinSim \
             -configuration Release \
             -destination 'generic/platform=iOS' \
@@ -40,14 +40,12 @@ jobs:
           fi
           echo "APP_PATH: $APP_PATH"
           if [ -z "$APP_PATH" ]; then
-            # Try another path pattern
-            APP_PATH=$(find . -name "*.app" -type d | grep -v ".dSYM" | head -1)
+            APP_PATH=$(find . -name "*.app" -type d ! -name "*.dSYM" | head -1)
           fi
           echo "Found: $APP_PATH"
 
           # Clean code signature artifacts
           rm -rf "${APP_PATH}/_CodeSignature"
-          rm -rf "${APP_PATH}/Frameworks/.swiftinterface"
           find "${APP_PATH}" -name "*.swiftinterface" -delete 2>/dev/null
           find "${APP_PATH}" -name "__debug_*" -delete 2>/dev/null
           find "${APP_PATH}" -name "*debug*" -path "*/dylibs/*" -delete 2>/dev/null
