@@ -17,8 +17,7 @@ jobs:
         run: |
           xcode-select -p
           xcodebuild -version
-          # Show available destinations
-          xcodebuild -project LuckinSim.xcodeproj -scheme LuckinSim -showdestinations 2>&1 | head -30
+          xcodebuild -showsdks
 
       - name: Build for iPhoneOS
         run: |
@@ -35,23 +34,13 @@ jobs:
 
       - name: Extract and package IPA
         run: |
-          # Find the .app in DerivedData
-          APP_PATH=$(find DerivedData -name "LuckinSim.app" -type d 2>/dev/null | head -1)
+          # Find .app in DerivedData (user Library path)
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "LuckinSim.app" -type d 2>/dev/null | head -1)
           echo "APP_PATH: $APP_PATH"
-          if [ -z "$APP_PATH" ]; then
-            # Try alternate locations
-            APP_PATH=$(find Build -name "LuckinSim.app" -type d 2>/dev/null | head -1)
-          fi
-          echo "Found: $APP_PATH"
-          if [ -z "$APP_PATH" ]; then
-            # Last resort: search entire workspace
-            APP_PATH=$(find . -name "*.app" -type d ! -name "*.dSYM" 2>/dev/null | head -1)
-          fi
-          echo "Final: $APP_PATH"
-
+          
           if [ -z "$APP_PATH" ]; then
             echo "ERROR: Could not find LuckinSim.app"
-            find . -name "*.app" -type d 2>/dev/null | head -5
+            find ~ -name "LuckinSim.app" -type d 2>/dev/null | head -5
             exit 1
           fi
 
