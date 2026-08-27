@@ -5,7 +5,7 @@
       <BuildActionEntry buildForTesting="YES" buildForRunning="YES" buildForProfiling="YES" buildForArchiving="YES" buildForAnalyzing="YES">
         <BuildableReference
           BuildableIdentifier="primary"
-          BlueprintIdentifier="LUCKINSIM_TARGET_ID"
+          BlueprintIdentifier="001441DF64"
           BuildableName="LuckinSim.app"
           BlueprintName="LuckinSim"
           ReferencedContainer="container:LuckinSim.xcodeproj">
@@ -18,7 +18,7 @@
     <BuildableProductRunnable runnableDebuggingMode="0">
       <BuildableReference
         BuildableIdentifier="primary"
-        BlueprintIdentifier="LUCKINSIM_TARGET_ID"
+        BlueprintIdentifier="001441DF64"
         BuildableName="LuckinSim.app"
         BlueprintName="LuckinSim"
         ReferencedContainer="container:LuckinSim.xcodeproj">
@@ -29,7 +29,7 @@
     <BuildableProductRunnable runnableDebuggingMode="0">
       <BuildableReference
         BuildableIdentifier="primary"
-        BlueprintIdentifier="LUCKINSIM_TARGET_ID"
+        BlueprintIdentifier="001441DF64"
         BuildableName="LuckinSim.app"
         BlueprintName="LuckinSim"
         ReferencedContainer="container:LuckinSim.xcodeproj">
