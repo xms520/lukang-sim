@@ -1,0 +1,75 @@
+name: Build LuckinSim IPA
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build IPA
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Xcode
+        run: |
+          xcode-select -p
+          xcodebuild -version
+          xcodebuild -showsdks
+
+      - name: Build for iPhoneOS
+        run: |
+          xcodebuild build \
+            -workspace LuckinSim.xcworkspace \
+            -scheme LuckinSim \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="-" \
+            PROVISIONING_PROFILE_SPECIFIER="" \
+            | xcpretty || true
+
+      - name: Extract and package IPA
+        run: |
+          APP_PATH=$(find DerivedData -name "LuckinSim.app" -type d | head -1)
+          if [ -z "$APP_PATH" ]; then
+            APP_PATH=$(find Build -name "LuckinSim.app" -type d | head -1)
+          fi
+          echo "APP_PATH: $APP_PATH"
+          if [ -z "$APP_PATH" ]; then
+            # Try another path pattern
+            APP_PATH=$(find . -name "*.app" -type d | grep -v ".dSYM" | head -1)
+          fi
+          echo "Found: $APP_PATH"
+
+          # Clean code signature artifacts
+          rm -rf "${APP_PATH}/_CodeSignature"
+          rm -rf "${APP_PATH}/Frameworks/.swiftinterface"
+          find "${APP_PATH}" -name "*.swiftinterface" -delete 2>/dev/null
+          find "${APP_PATH}" -name "__debug_*" -delete 2>/dev/null
+          find "${APP_PATH}" -name "*debug*" -path "*/dylibs/*" -delete 2>/dev/null
+
+          # Create Payload directory
+          mkdir -p Payload
+          cp -r "${APP_PATH}" Payload/
+
+          # Create IPA
+          zip -r LuckinSim.ipa Payload -x "*.DS_Store"
+          rm -rf Payload
+
+          # Create placeholder CodeSignature for TrollStore
+          mkdir -p "${APP_PATH}/_CodeSignature"
+          echo "{}" > "${APP_PATH}/_CodeSignature/CodeResources"
+
+          # Verify
+          file LuckinSim.ipa
+          ls -la LuckinSim.ipa
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: LuckinSim
+          path: LuckinSim.ipa

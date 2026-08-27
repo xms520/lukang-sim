@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="瑞幸咖啡">
+    <link rel="apple-touch-icon" href="img/app.png">
+    
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <meta name="application-name" content="瑞幸咖啡">
+    <title>瑞幸咖啡</title>
+    <style>
+        @font-face {
+            font-family: 'ZtFont';
+            src: url('Zt.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        #top-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background-color: #fff;
+            z-index: 9999;
+            margin: 0;
+            padding: 0;
+            display: block;
+            object-fit: cover;
+        }
+
+        .card-outer {
+            position: absolute;
+            top: 120px;
+            bottom: 120px;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .avatar-container {
+            width: 93%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-left: 11.5px;
+            z-index: 10000;
+            pointer-events: auto;
+        }
+
+        .avatar {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background-color: #fff;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .username-icon {
+            width: 10.8px;
+            height: 10.8px;
+            margin-left: 4.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .username-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .card {
+            --card-width: 93%;
+            --card-padding: 41px;
+            --card-radius: 12px;
+            --card-shadow: 0 4px 10px #E6ECF3;
+
+            width: var(--card-width);
+            height: 93px;
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--card-shadow);
+            padding: var(--card-padding);
+            z-index: 9999;
+            box-sizing: border-box;
+            margin-top: 0;
+            pointer-events: auto;
+            position: relative;
+        }
+        .card h3, .card p, .card button { display: none; }
+
+        .vip-image {
+            position: absolute;
+            top: -35px;
+            right: 0px;
+            width: 90px;
+            height: 90px;
+            z-index: 10001;
+            pointer-events: none;
+        }
+
+        .vip-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .level-image {
+            position: absolute;
+            top: -14px;
+            left: 0px;
+            width: 79px;
+            height: 79px;
+            z-index: 10001;
+            pointer-events: none;
+        }
+
+        .level-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .points-info {
+            position: absolute;
+            top: 55px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 10002;
+            pointer-events: none;
+        }
+
+        .points-text {
+            color: #333;
+            font-size: 21px;
+            font-weight: bold;
+            margin-left: 15px;
+            font-family: 'ZtFont', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .points-icon {
+    width: 11px;
+    height: 19.8px;
+    margin-left: 6px;
+    position: relative;
+    top: -2px;
+}
+
+        .points-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .points-icon-2 {
+            width: 130px;
+            height: 30px;
+            margin-left: 8px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .points-icon-2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .progress-container {
+            position: absolute;
+            top: 78px;
+            left: 0;
+            width: calc(100% - 20px);
+            height: 4.4px;
+            background-color: #E6E6E6;
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 10002;
+            pointer-events: none;
+            margin: 0 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #D9AA38;
+            width: 30%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .expiry-text {
+            position: absolute;
+            bottom: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D1A896;
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-align: center;
+            z-index: 10002;
+            pointer-events: none;
+        }
+
+        #middle-image {
+            position: absolute;
+            top: 120px;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+            z-index: 9998;
+            margin: 0;
+            padding: 0;
+            display: block;
+            object-fit: cover;
+        }
+
+        #middle-image-2 {
+            position: absolute;
+            top: 320px;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+            z-index: 9997;
+            margin: 0;
+            padding: 0;
+            display: block;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.22s ease-out;
+        }
+
+        #middle-image-2.show {
+            opacity: 1;
+        }
+
+        .content-container {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            z-index: 9998;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .toggle-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            cursor: pointer;
+            z-index: 9999;
+            touch-action: pan-y;
+            transition: opacity 0.30s ease-out;
+        }
+        .toggle-image.fading {
+            opacity: 0.62;
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            height: auto;
+            z-index: 9996;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .carousel {
+            width: 96%;
+            margin: 0 auto;
+            height: auto;
+            min-height: 70px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 100%;
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 9997;
+        }
+
+        .carousel-indicator {
+            width: 5px;
+            height: 5px;
+            border-radius: 3px;
+            background: #CCCCCC;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            width: 16px;
+            background: #CCCCCC;
+        }
+
+        .below-carousel-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-top: 0;
+            opacity: 1;
+            transition: opacity 0.30s ease-out;
+        }
+
+        #bottom-image {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+            z-index: 9999;
+            margin: 0;
+            padding: 0;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* 底部动态图片样式 */
+        .bottom-switch-image {
+            position: fixed;
+            bottom: 67px; /* 贴近底部图片 */
+            left: 25px;
+            width: 155px; /* 比VIP图片稍大 */
+            height: 100px;
+            z-index: 10000;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .bottom-switch-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 85%;
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .option-item {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-item.active {
+            background-color: #1E4B7B;
+            color: white;
+        }
+
+        .option-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #1E4B7B;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .avatar-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .avatar-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-btn {
+            background-color: #1E4B7B;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .fallback-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #333;
+        }
+
+        @media all and (display-mode: standalone) {
+            #bottom-image {
+                bottom: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body style="height: 100vh;">
+    <img id="top-image" src="ding/1.png" alt="顶部图片">
+
+    <div class="card-outer">
+        <div class="avatar-container">
+            <div class="avatar" id="avatar">
+                <img src="img/top.png" alt="头像">
+            </div>
+            <div class="username" id="username">
+                xiongmao
+                <div class="username-icon">
+                    <img src="img/6.png" alt="用户图标" onerror="this.parentElement.innerHTML='<div class=\'fallback-icon\'>▶</div>'">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="vip-image">
+                <img src="img/vip.png" alt="VIP">
+                <div class="expiry-text" id="expiry-text">2099-12-31到期</div>
+            </div>
+            
+            <div class="level-image">
+                <img id="level-image" src="lv/1.png" alt="等级">
+            </div>
+
+            <div class="points-info">
+                <span class="points-text" id="points-text">917813</span>
+                <div class="points-icon">
+                    <img src="img/7.png" alt="积分图标">
+                </div>
+                <div class="points-icon-2">
+                    <img src="img/8.png" alt="积分图标2">
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <img id="middle-image" src="img/2.png" alt="中间图片">
+    <img id="middle-image-2" src="img/2.1.png" alt="中间图片2">
+
+    <div class="content-container" id="content-container">
+        <img src="img/3.png" alt="可滑动图片" class="toggle-image" id="toggle-image">
+
+        <div class="carousel-wrapper" id="carousel-wrapper">
+            <div class="carousel" id="carousel">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="toe/1.png" alt="轮播图1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="toe/2.png" alt="轮播图2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="toe/3.png" alt="轮播图3">
+                    </div>
+                </div>
+                <div class="carousel-indicators" id="carousel-indicators">
+                    <div class="carousel-indicator active"></div>
+                    <div class="carousel-indicator"></div>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+        <img src="img/5.png" alt="轮播下方图片" class="below-carousel-image" id="below-carousel-image">
+    </div>
+
+    <!-- 底部动态切换图片 -->
+    <div class="bottom-switch-image" id="bottom-switch-image">
+        <img src="di/1.png" alt="动态图片">
+    </div>
+
+    <img id="bottom-image" src="img/1.png" alt="底部图片">
+
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">个性化设置</div>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">头像设置</div>
+                <div class="avatar-upload">
+                    <div class="avatar-preview" id="avatar-preview">
+                        <img src="img/top.png" alt="头像预览" id="avatar-preview-img">
+                    </div>
+                    <div class="upload-btn" id="upload-avatar">上传头像</div>
+                    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">用户名</div>
+                <div class="input-group">
+                    <input type="text" class="input-field" id="username-input" value="GuYi" maxlength="20">
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">头像背景</div>
+                <div class="option-group" id="avatar-bg-options">
+                    <div class="option-item active" data-value="ding/1.png">
+                        <img src="ding/1.png" alt="背景1">
+                        <div>背景1</div>
+                    </div>
+                    <div class="option-item" data-value="ding/2.png">
+                        <img src="ding/2.png" alt="背景2">
+                        <div>背景2</div>
+                    </div>
+                    <div class="option-item" data-value="ding/3.png">
+                        <img src="ding/3.png" alt="背景3">
+                        <div>背景3</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">等级图标</div>
+                <div class="option-group" id="level-options">
+                    <div class="option-item active" data-value="1">
+                        <div>小蓝鹿</div>
+                    </div>
+                    <div class="option-item" data-value="2">
+                        <div>黑金鹿</div>
+                    </div>
+                    <div class="option-item" data-value="3">
+                        <div>九色鹿</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">积分设置</div>
+                <div class="input-group">
+                    <label class="input-label">积分数量</label>
+                    <input type="number" class="input-field" id="points-input" min="0" value="917813">
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">进度条设置</div>
+                <div class="input-group">
+                    <label class="input-label">进度值 (0-200)</label>
+                    <input type="number" class="input-field" id="progress-input" min="0" max="200" value="60">
+                </div>
+            </div>
+            
+            <div class="modal-section">
+                <div class="section-title">到期时间</div>
+                <div class="input-group">
+                    <label class="input-label">到期日期</label>
+                    <input type="text" class="input-field" id="expiry-input" value="2099-12-31" placeholder="请输入到期日期">
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="reset-btn">重置</button>
+                <button class="btn btn-primary" id="save-btn">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 底部动态图片元素
+            const bottomSwitchImage = document.getElementById('bottom-switch-image');
+            const bottomSwitchImg = bottomSwitchImage.querySelector('img');
+            
+            const topImage = document.getElementById('top-image');
+            const middleImage = document.getElementById('middle-image');
+            const middleImage2 = document.getElementById('middle-image-2');
+            const bottomImage = document.getElementById('bottom-image');
+            const toggleImage = document.getElementById('toggle-image');
+            const contentContainer = document.getElementById('content-container');
+            const carouselWrapper = document.getElementById('carousel-wrapper');
+            const carousel = document.getElementById('carousel');
+            const carouselTrack = document.getElementById('carousel-track');
+            const carouselIndicators = document.getElementById('carousel-indicators');
+            const belowCarouselImage = document.getElementById('below-carousel-image');
+            
+            const avatar = document.getElementById('avatar');
+            const username = document.getElementById('username');
+            const pointsText = document.getElementById('points-text');
+            const progressBar = document.getElementById('progress-bar');
+            const expiryText = document.getElementById('expiry-text');
+            const levelImage = document.getElementById('level-image');
+            
+            const settingsModal = document.getElementById('settings-modal');
+            const closeModal = document.getElementById('close-modal');
+            const avatarBgOptions = document.getElementById('avatar-bg-options');
+            const levelOptions = document.getElementById('level-options');
+            const pointsInput = document.getElementById('points-input');
+            const progressInput = document.getElementById('progress-input');
+            const expiryInput = document.getElementById('expiry-input');
+            const resetBtn = document.getElementById('reset-btn');
+            const saveBtn = document.getElementById('save-btn');
+            
+            const avatarPreview = document.getElementById('avatar-preview-img');
+            const uploadAvatarBtn = document.getElementById('upload-avatar');
+            const avatarInput = document.getElementById('avatar-input');
+            const usernameInput = document.getElementById('username-input');
+
+            let isAnimating = false;
+            let isSlidDown = false;
+            let currentCarouselIndex = 0;
+            let carouselInterval;
+            let bottomImageSwitchInterval;
+            let currentBottomImage = 1;
+
+            // 底部动态图片切换功能
+            function initBottomImageSwitch() {
+                bottomImageSwitchInterval = setInterval(() => {
+                    currentBottomImage = currentBottomImage === 1 ? 2 : 1;
+                    bottomSwitchImg.src = `di/${currentBottomImage}.png`;
+                }, 500); // 每0.5秒切换一次
+            }
+
+            function initLocalStorage() {
+                if (!localStorage.getItem('avatarBg')) {
+                    localStorage.setItem('avatarBg', 'ding/1.png');
+                }
+                if (!localStorage.getItem('level')) {
+                    localStorage.setItem('level', '1');
+                }
+                if (!localStorage.getItem('points')) {
+                    localStorage.setItem('points', '917813');
+                }
+                if (!localStorage.getItem('progress')) {
+                    localStorage.setItem('progress', '60');
+                }
+                if (!localStorage.getItem('expiry')) {
+                    localStorage.setItem('expiry', '2099-12-31');
+                }
+                if (!localStorage.getItem('avatar')) {
+                    localStorage.setItem('avatar', 'img/top.png');
+                }
+                if (!localStorage.getItem('username')) {
+                    localStorage.setItem('username', 'GuYi');
+                }
+                
+                applyStoredSettings();
+            }
+
+            function applyStoredSettings() {
+                const avatarBg = localStorage.getItem('avatarBg');
+                topImage.src = avatarBg;
+                
+                const level = localStorage.getItem('level');
+                levelImage.src = `lv/${level}.png`;
+                
+                const points = localStorage.getItem('points');
+                pointsText.textContent = points;
+                
+                const progress = localStorage.getItem('progress');
+                progressBar.style.width = `${(progress / 200) * 100}%`;
+                progressInput.value = progress;
+                
+                const expiry = localStorage.getItem('expiry');
+                expiryText.textContent = `${expiry}到期`;
+                expiryInput.value = expiry;
+                
+                const avatarSrc = localStorage.getItem('avatar');
+                const avatarImg = avatar.querySelector('img');
+                avatarImg.src = avatarSrc;
+                avatarPreview.src = avatarSrc;
+                
+                // 修复这里：直接设置用户名文本内容，不破坏图标
+                const usernameValue = localStorage.getItem('username');
+                // 找到用户名文本节点
+                const usernameNodes = username.childNodes;
+                for (let i = 0; i < usernameNodes.length; i++) {
+                    if (usernameNodes[i].nodeType === 3) { // 文本节点
+                        usernameNodes[i].textContent = usernameValue;
+                        break;
+                    }
+                }
+                usernameInput.value = usernameValue;
+                
+                updateOptionStates();
+            }
+
+            function updateOptionStates() {
+                const avatarBg = localStorage.getItem('avatarBg');
+                const avatarOptions = avatarBgOptions.querySelectorAll('.option-item');
+                avatarOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-value') === avatarBg) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                const level = localStorage.getItem('level');
+                const levelOptionsElements = levelOptions.querySelectorAll('.option-item');
+                levelOptionsElements.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-value') === level) {
+                        option.classList.add('active');
+                    }
+                });
+            }
+
+            function initCarousel() {
+                const slides = document.querySelectorAll('.carousel-slide');
+                const indicators = document.querySelectorAll('.carousel-indicator');
+
+                function goToSlide(index) {
+                    currentCarouselIndex = index;
+                    carouselTrack.style.transform = `translateX(-${index * 100}%)`;
+                    indicators.forEach((indicator, i) => {
+                        indicator.classList.toggle('active', i === index);
+                    });
+                }
+
+                function nextSlide() {
+                    let nextIndex = currentCarouselIndex + 1;
+                    if (nextIndex >= slides.length) {
+                        carouselTrack.style.transition = 'none';
+                        carouselTrack.style.transform = `translateX(0)`;
+                        carouselTrack.offsetHeight;
+                        carouselTrack.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        nextIndex = 1;
+                    }
+                    goToSlide(nextIndex);
+                }
+
+                carouselInterval = setInterval(nextSlide, 3500);
+
+                let startX = 0;
+                let currentX = 0;
+                carousel.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                });
+                carousel.addEventListener('touchmove', function(e) {
+                    currentX = e.touches[0].clientX;
+                });
+                carousel.addEventListener('touchend', function(e) {
+                    const diff = startX - currentX;
+                    const minSwipeDistance = 50;
+                    if (Math.abs(diff) > minSwipeDistance) {
+                        if (diff > 0) nextSlide();
+                        else {
+                            const prevIndex = currentCarouselIndex - 1 >= 0 ? currentCarouselIndex - 1 : slides.length - 1;
+                            goToSlide(prevIndex);
+                        }
+                    }
+                });
+
+                return { goToSlide, nextSlide };
+            }
+
+            function alignCarouselToImageBottom() {
+                requestAnimationFrame(() => {
+                    carouselWrapper.style.marginTop = '0';
+                    carouselWrapper.style.position = 'relative';
+                    carouselWrapper.style.top = '0';
+                    belowCarouselImage.style.marginTop = '0';
+                });
+            }
+
+            function updateAllPositions() {
+                requestAnimationFrame(() => {
+                    const topHeight = topImage.offsetHeight || 120;
+                    const middleImageHeight = middleImage.offsetHeight || 200;
+                    const middleImage2Height = middleImage2.offsetHeight || 200;
+
+                    middleImage.style.top = topHeight + 'px';
+                    middleImage2.style.top = (topHeight + middleImageHeight) + 'px';
+
+                    if (!isSlidDown) {
+                        contentContainer.style.top = (topHeight + middleImageHeight) + 'px';
+                    } else {
+                        contentContainer.style.top = (topHeight + middleImageHeight + middleImage2Height) + 'px';
+                    }
+
+                    alignCarouselToImageBottom();
+                });
+            }
+
+            function fadeImageIn(newSrc, done) {
+                toggleImage.classList.add('fading');
+                setTimeout(() => {
+                    toggleImage.src = newSrc;
+                    toggleImage.onload = () => {
+                        setTimeout(() => {
+                            toggleImage.classList.remove('fading');
+                            done();
+                        }, 80);
+                    };
+                }, 160);
+            }
+
+            function slideDown() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                middleImage2.classList.add('show');
+                isSlidDown = true;
+
+                updateAllPositions();
+
+                fadeImageIn('img/4.png', () => {
+                    isAnimating = false;
+                    alignCarouselToImageBottom();
+                });
+            }
+
+            function slideUp() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                middleImage2.classList.remove('show');
+                isSlidDown = false;
+
+                updateAllPositions();
+
+                fadeImageIn('img/3.png', () => {
+                    isAnimating = false;
+                    alignCarouselToImageBottom();
+                });
+            }
+
+            toggleImage.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (isSlidDown) slideUp();
+                else slideDown();
+            });
+
+            let startY = 0;
+            let currentY = 0;
+            toggleImage.addEventListener('touchstart', function(e) {
+                startY = e.touches[0].clientY;
+            });
+            toggleImage.addEventListener('touchmove', function(e) {
+                if (isAnimating) return;
+                currentY = e.touches[0].clientY;
+            });
+            toggleImage.addEventListener('touchend', function(e) {
+                if (isAnimating) return;
+                const diff = startY - currentY;
+                const minSwipeDistance = 50;
+                if (Math.abs(diff) > minSwipeDistance) {
+                    if (diff > 0 && !isSlidDown) slideDown();
+                    else if (diff < 0 && isSlidDown) slideUp();
+                }
+            });
+
+            function handleImageLoad(imgElement) {
+                if (imgElement.naturalWidth > 0) {
+                    const aspectRatio = imgElement.naturalHeight / imgElement.naturalWidth;
+                    const newHeight = window.innerWidth * aspectRatio;
+                    imgElement.style.height = newHeight + 'px';
+                }
+                imgElement.style.width = '100%';
+                updateAllPositions();
+            }
+
+            function handleImageError(imgElement, placeholderText) {
+                imgElement.style.background = '#fff';
+                imgElement.style.display = 'flex';
+                imgElement.style.alignItems = 'center';
+                imgElement.style.justifyContent = 'center';
+                imgElement.style.color = '#999';
+                imgElement.style.fontSize = '14px';
+                imgElement.innerHTML = placeholderText;
+                imgElement.style.width = '100%';
+                imgElement.style.height = '200px';
+                updateAllPositions();
+            }
+
+            function initModal() {
+                // 修复头像点击事件
+                avatar.addEventListener('click', function() {
+                    console.log('头像被点击');
+                    settingsModal.style.display = 'flex';
+                });
+                
+                // 修复用户名点击事件
+                username.addEventListener('click', function() {
+                    console.log('用户名被点击');
+                    settingsModal.style.display = 'flex';
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    settingsModal.style.display = 'none';
+                });
+                
+                settingsModal.addEventListener('click', function(e) {
+                    if (e.target === settingsModal) {
+                        settingsModal.style.display = 'none';
+                    }
+                });
+                
+                uploadAvatarBtn.addEventListener('click', function() {
+                    avatarInput.click();
+                });
+                
+                avatarInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const imgSrc = event.target.result;
+                            avatarPreview.src = imgSrc;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                
+                const avatarOptions = avatarBgOptions.querySelectorAll('.option-item');
+                avatarOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        avatarOptions.forEach(opt => opt.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                
+                const levelOptionsElements = levelOptions.querySelectorAll('.option-item');
+                levelOptionsElements.forEach(option => {
+                    option.addEventListener('click', function() {
+                        levelOptionsElements.forEach(opt => opt.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                
+                resetBtn.addEventListener('click', function() {
+                    localStorage.removeItem('avatarBg');
+                    localStorage.removeItem('level');
+                    localStorage.removeItem('points');
+                    localStorage.removeItem('progress');
+                    localStorage.removeItem('expiry');
+                    localStorage.removeItem('avatar');
+                    localStorage.removeItem('username');
+                    
+                    initLocalStorage();
+                    
+                    settingsModal.style.display = 'none';
+                });
+                
+                saveBtn.addEventListener('click', function() {
+                    const selectedAvatarBg = avatarBgOptions.querySelector('.option-item.active').getAttribute('data-value');
+                    localStorage.setItem('avatarBg', selectedAvatarBg);
+                    
+                    const selectedLevel = levelOptions.querySelector('.option-item.active').getAttribute('data-value');
+                    localStorage.setItem('level', selectedLevel);
+                    
+                    const pointsValue = pointsInput.value;
+                    localStorage.setItem('points', pointsValue);
+                    
+                    const progressValue = progressInput.value;
+                    localStorage.setItem('progress', progressValue);
+                    
+                    const expiryValue = expiryInput.value;
+                    localStorage.setItem('expiry', expiryValue);
+                    
+                    const avatarValue = avatarPreview.src;
+                    localStorage.setItem('avatar', avatarValue);
+                    
+                    const usernameValue = usernameInput.value;
+                    localStorage.setItem('username', usernameValue);
+                    
+                    applyStoredSettings();
+                    
+                    settingsModal.style.display = 'none';
+                });
+            }
+
+            topImage.onload = () => handleImageLoad(topImage);
+            topImage.onerror = () => handleImageError(topImage, '顶部图片');
+            middleImage.onload = () => handleImageLoad(middleImage);
+            middleImage.onerror = () => handleImageError(middleImage, '中间图片');
+            middleImage2.onload = () => handleImageLoad(middleImage2);
+            middleImage2.onerror = () => handleImageError(middleImage2, '中间图片2');
+            toggleImage.onload = () => handleImageLoad(toggleImage);
+            toggleImage.onerror = () => handleImageError(toggleImage, '点击我滑动');
+            belowCarouselImage.onload = () => handleImageLoad(belowCarouselImage);
+            belowCarouselImage.onerror = () => handleImageError(belowCarouselImage, '轮播下方图片');
+            bottomImage.onload = () => handleImageLoad(bottomImage);
+            bottomImage.onerror = () => handleImageError(bottomImage, '底部图片');
+
+            const carouselControl = initCarousel();
+            initLocalStorage();
+            initModal();
+            updateAllPositions();
+            setTimeout(updateAllPositions, 100);
+            setTimeout(updateAllPositions, 500);
+            setInterval(updateAllPositions, 1000);
+            window.addEventListener('resize', updateAllPositions);
+
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) clearInterval(carouselInterval);
+                else carouselInterval = setInterval(carouselControl.nextSlide, 3500);
+            });
+            
+            // 初始化底部动态图片切换
+            initBottomImageSwitch();
+        });
+    </script>
+</body>
+</html>
