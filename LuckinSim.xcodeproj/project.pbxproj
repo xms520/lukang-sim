@@ -6,24 +6,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		005EE081FE /* AppDelegate.swift */ = {isa = PBXBuildFile; fileRef = 0091CD7D5A; };
-		00C6059879 /* ViewController.swift */ = {isa = PBXBuildFile; fileRef = 00450EB058; };
-		00477B6A0A /* index.html */ = {isa = PBXBuildFile; fileRef = 0051788CF1; settings = {ATTRIBUTES = (Retargetable,);}; };
-		00DD22DCBF /* Info.plist */ = {isa = PBXBuildFile; fileRef = 002D66C24C; };
-		00CD36876D /* LuckinSim-Bridging-Header.h */ = {isa = PBXBuildFile; fileRef = 00197D944C; };
+		E69AB4CB20 /* AppDelegate.swift */ = {isa = PBXBuildFile; fileRef = F7D3332FCC; };
+		1C296D180D /* ViewController.swift */ = {isa = PBXBuildFile; fileRef = 1AE5682C76; };
+		2DBDE2971D /* index.html */ = {isa = PBXBuildFile; fileRef = 2A8DAC4E07; settings = {ATTRIBUTES = (Retargetable,);}; };
+		2B23D7CBDF /* Info.plist */ = {isa = PBXBuildFile; fileRef = 2507214FE4; };
+		E958D6D46E /* LuckinSim-Bridging-Header.h */ = {isa = PBXBuildFile; fileRef = 420C1E808F; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00611B09A3 /* LuckinSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckinSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0091CD7D5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		00450EB058 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0051788CF1 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		002D66C24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00197D944C /* LuckinSim-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckinSim-Bridging-Header.h; sourceTree = "<group>"; };
+		C2F5CCE940 /* LuckinSim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuckinSim.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7D3332FCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1AE5682C76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2A8DAC4E07 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		2507214FE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		420C1E808F /* LuckinSim-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckinSim-Bridging-Header.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		001193F9EA /* Frameworks */ = {
+		501FB86C06 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = ();
@@ -32,36 +32,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00B2E471BD = {
+		798A65AFAC = {
 			isa = PBXGroup;
 			children = (
-				007CACB82B,
-				005606E4F0,
-				0033FDDEAF,
-				00611B09A3,
+				8C5CE6A161,
+				B840B7F190,
+				53B4D46981,
+				5B075F32D7,
+				C2F5CCE940,
 			);
-			path = LuckinSim;
 			sourceTree = "<group>";
 		};
-		007CACB82B = {
+		8C5CE6A161 = {
 			isa = PBXGroup;
 			children = (
-				0091CD7D5A,
-				00450EB058,
-				00197D944C,
+				F7D3332FCC,
+				1AE5682C76,
+				420C1E808F,
+				2507214FE4,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		005606E4F0 = {
+		B840B7F190 = {
 			isa = PBXGroup;
 			children = (
-				0051788CF1,
+				2A8DAC4E07,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		0033FDDEAF = {
+		53B4D46981 = {
+			isa = PBXGroup;
+			children = ();
+			path = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		5B075F32D7 = {
 			isa = PBXGroup;
 			children = ();
 			path = Frameworks;
@@ -70,35 +77,31 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		001441DF64 /* LuckinSim */ = {
+		2B84B22014 /* LuckinSim */ = {
 			isa = PBXNativeTarget;
 			buildPhases = (
-				005FD93E28,
-				001193F9EA,
-				0019E1144F,
+				EC81D9FA17,
+				501FB86C06,
+				2CF01A4E0C,
 			);
 			buildRules = ();
 			dependencies = ();
 			name = LuckinSim;
-			productRef = 00611B09A3;
+			productRef = C2F5CCE940;
 			productName = LuckinSim;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0026CABFBE /* Project object */ = {
+		4779CF5043 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-					001441DF64 = {
-						CreatedOnToolsVersion = 15.0;
-					};
-				};
+				TargetAttributes = {};
 			};
-			buildConfigurationList = 001BD74CED;
+			buildConfigurationList = AC97537C77;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = zh-Hans;
 			hasScannedForEncodings = 0;
@@ -106,41 +109,41 @@
 				en,
 				"zh-Hans",
 			);
-			mainGroup = 00B2E471BD;
-			productRef = 00611B09A3;
+			mainGroup = 798A65AFAC;
+			productRef = C2F5CCE940;
 			productName = LuckinSim;
 			provisioningStyle = Automatic;
 			targets = (
-				001441DF64,
+				2B84B22014,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0019E1144F /* Resources */ = {
+		2CF01A4E0C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00477B6A0A,
+				2DBDE2971D,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		005FD93E28 /* Sources */ = {
+		EC81D9FA17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				005EE081FE,
-				00C6059879,
+				E69AB4CB20,
+				1C296D180D,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		00868D51A9 /* Debug */ = {
+		80E0EC1432 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -157,12 +160,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.luckin.simulator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = "5.0";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		00DE528760 /* Release */ = {
+		D2F7F9ED3A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -179,12 +182,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.luckin.simulator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = "5.0";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		00C5E6492F /* Debug */ = {
+		6051AB1CAD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -206,13 +209,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = "5.0";
+				SWIFT_VERSION = 5.0;
 				SDKROOT = iphoneos;
 				CODE_SIGNING_REQUIRED = NO;
 			};
 			name = Debug;
 		};
-		0086EE4C8D /* Release */ = {
+		76B9172925 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -232,7 +235,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = "5.0";
+				SWIFT_VERSION = 5.0;
 				SDKROOT = iphoneos;
 				CODE_SIGNING_REQUIRED = NO;
 			};
@@ -241,23 +244,23 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		001BD74CED /* Build configuration list for PBXProject "LuckinSim" */ = {
+		AC97537C77 /* Build configuration list for PBXProject "LuckinSim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				00868D51A9,
-				00DE528760,
+				80E0EC1432,
+				D2F7F9ED3A,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		00825D694D /* Build configuration list for PBXNativeTarget "LuckinSim" */ = {
+		454AA4B595 /* Build configuration list for PBXNativeTarget "LuckinSim" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				00C5E6492F,
-				0086EE4C8D,
+				6051AB1CAD,
+				76B9172925,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0026CABFBE;
+	rootObject = 4779CF5043;
 }
