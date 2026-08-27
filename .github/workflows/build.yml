@@ -19,13 +19,14 @@ jobs:
           xcodebuild -version
           xcodebuild -showsdks
 
-      - name: Build for iPhoneOS
+      - name: Archive for iPhoneOS
         run: |
-          xcodebuild build \
+          xcodebuild archive \
             -project LuckinSim.xcodeproj \
             -scheme LuckinSim \
             -configuration Release \
             -destination 'generic/platform=iOS' \
+            -archivePath LuckinSim.xcarchive \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="-" \
@@ -34,15 +35,9 @@ jobs:
 
       - name: Extract and package IPA
         run: |
-          APP_PATH=$(find DerivedData -name "LuckinSim.app" -type d | head -1)
-          if [ -z "$APP_PATH" ]; then
-            APP_PATH=$(find Build -name "LuckinSim.app" -type d | head -1)
-          fi
+          APP_PATH="LuckinSim.xcarchive/Products/Applications/LuckinSim.app"
           echo "APP_PATH: $APP_PATH"
-          if [ -z "$APP_PATH" ]; then
-            APP_PATH=$(find . -name "*.app" -type d ! -name "*.dSYM" | head -1)
-          fi
-          echo "Found: $APP_PATH"
+          ls -la "${APP_PATH}/" | head -10
 
           # Clean code signature artifacts
           rm -rf "${APP_PATH}/_CodeSignature"
